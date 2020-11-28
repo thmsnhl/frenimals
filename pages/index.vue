@@ -23,12 +23,26 @@
           GitHub
         </a>
       </div>
+      <div v-for="post in posts" :key="post.id">
+        {{ post.title }}
+        {{ post.description }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  async fetch () {
+    this.posts = await this.$http.$get('https://api.nuxtjs.dev/posts')
+  },
+  data () {
+    return {
+      posts: []
+    }
+  },
+  fetchOnServer: false
+}
 </script>
 
 <style>
